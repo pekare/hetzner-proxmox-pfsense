@@ -4,24 +4,26 @@ I did not really like the NAT solutions recommended for ESXi/Proxmox/SmartOS on 
 The perfectionist in me wanted to have the hypervisor behind the same firewall as the VM's.
 This is how I managed to implement pfSense with 1 NIC (1 IP) in Proxmox using PCI passthrough.
 
-Step 1: install proxmox
+## step 1: install proxmox
 Request a LARA (their nickname for KVM/IPMI) session.
 I had an installed flash drive after trying SmartOS, so I just dd'ed the .iso from their live linux rescue system.
 Either that or request them to mount the iso in the LARA (KVM/IPMI) session.
 
-Step 2: enable PCI passthrough
+## step 2: enable PCI passthrough
 edit /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"
 
 edit /etc/modules
+'''
 vfio
 vfio_iommu_type1
 vfio_pci
 vfio_virqfd
-
+'''
+'''
 update-grub
 reboot
-
+'''
 Step 3: create pfsense vm
 Create a VM with 1 virtio interface.
 Enable serial console by adding 'serial0: socket' to /etc/pve/qemu-server/VMID.conf.
