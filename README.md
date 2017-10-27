@@ -75,4 +75,4 @@ reboot
 - Go to https://${external_ip} and System -> Advanced -> Networking
 check 'Disable hardware checksum offload'. (Not sure why, but that hindered me from connecting to webui/ssh on hypervisor.)
 
-## step 6: setup port forwardring or vpn to you liking..
+## step 6: setup port forwardring or vpn to your liking..
