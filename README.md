@@ -9,7 +9,7 @@ Request a LARA (their nickname for KVM/IPMI) session.
 I had an installed flash drive after trying SmartOS, so I just dd'ed the .iso from their live linux rescue system.
 Either that or request them to mount the iso in the LARA (KVM/IPMI) session.
 
-## step 2: enable PCI passthrough
+## step 2: enable pci passthrough
 edit /etc/default/grub
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"
@@ -26,11 +26,11 @@ update-grub
 reboot
 ```
 ## step 3: create pfsense vm
-Create a VM with 1 virtio interface.
-Boot vm and install as EMBEDDED.
-Shutdown VM after first reboot.
-Enable autostart in options of VM.
-Locate your ethernet card using "lspci". The address should be in the form of: 04:00.0.
+- Create a VM with 1 virtio interface.
+- Boot vm and install as EMBEDDED.
+- Shutdown VM after first reboot.
+- Enable autostart in options of VM.
+- Locate your ethernet card using "lspci". The address should be in the form of: 04:00.0.
 
 edit /etc/pve/qemu-server/VMID.conf
 ```
@@ -38,7 +38,7 @@ serial0: socket
 hostpci0: 04:00.0
 ```
 
-Step 4: change hypervisor network
+## step 4: change hypervisor network
 edit /etc/network/interfaces
 ```
 auto lo
@@ -66,13 +66,13 @@ edit /etc/hosts
 ```
 reboot
 ```
-Step 5: configure pfsense
-Back to LARA, use 'qm terminal VMID' to connect to pfsense VM.
-Finish initial setup.
+## step 5: configure pfsense
+- Back to LARA, use 'qm terminal VMID' to connect to pfsense VM.
+- Finish initial setup.
 WAN -> em0 -> v4/DHCP4: XXX.XXX.XXX.XXX/XX
 LAN -> vtnet0.11 -> v4: 10.0.11.1/24 (vlan 11 in this case)
-Enter shell (option 8), disable pf 'pfctl -d'
-Go to https://XXX.XXX.XXX.XXX and System -> Advanced -> Networking
+- Enter shell (option 8), disable pf 'pfctl -d'
+- Go to https://XXX.XXX.XXX.XXX and System -> Advanced -> Networking
 check 'Disable hardware checksum offload'. (Not sure why, but that hindered me from connecting to webui/ssh on hypervisor.)
 
-Step 6: setup port forwardring or VPN to you liking..
+## step 6: setup port forwardring or vpn to you liking..
