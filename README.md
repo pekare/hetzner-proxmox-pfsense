@@ -6,7 +6,7 @@ This is how I managed to implement pfSense with 1 NIC (1 IP) in Proxmox using PC
 
 ## step 1: install proxmox
 Request a LARA (their nickname for KVM/IPMI) session.
-I had an installed flash drive after trying SmartOS, so I just dd'ed the .iso from their live linux rescue system.
+I had a flash drive installed since exploring SmartOS eariler, so I just dd'ed the .iso from the linux rescue system.
 Either that or request them to mount the iso in the LARA (KVM/IPMI) session.
 
 ## step 2: enable pci passthrough
