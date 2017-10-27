@@ -69,10 +69,10 @@ reboot
 ## step 5: configure pfsense
 - Back to LARA, use 'qm terminal VMID' to connect to pfsense VM.
 - Finish initial setup.
-WAN -> em0 -> v4/DHCP4: XXX.XXX.XXX.XXX/XX
-LAN -> vtnet0.11 -> v4: 10.0.11.1/24 (vlan 11 in this case)
+  - WAN -> em0 -> v4/DHCP4: ${external_ip}/${cidr}
+  - LAN -> vtnet0.11 -> v4: 10.0.11.1/24 (vlan 11 in this case)
 - Enter shell (option 8), disable pf 'pfctl -d'
-- Go to https://XXX.XXX.XXX.XXX and System -> Advanced -> Networking
+- Go to https://${external_ip} and System -> Advanced -> Networking
 check 'Disable hardware checksum offload'. (Not sure why, but that hindered me from connecting to webui/ssh on hypervisor.)
 
 ## step 6: setup port forwardring or vpn to you liking..
