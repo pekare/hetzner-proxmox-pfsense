@@ -11,8 +11,9 @@ Either that or request them to mount the iso in the LARA (KVM/IPMI) session.
 
 ## step 2: enable PCI passthrough
 edit /etc/default/grub
+```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"
-
+```
 edit /etc/modules
 ```
 vfio
@@ -24,17 +25,22 @@ vfio_virqfd
 update-grub
 reboot
 ```
-Step 3: create pfsense vm
+## step 3: create pfsense vm
 Create a VM with 1 virtio interface.
-Enable serial console by adding 'serial0: socket' to /etc/pve/qemu-server/VMID.conf.
 Boot vm and install as EMBEDDED.
 Shutdown VM after first reboot.
 Enable autostart in options of VM.
 Locate your ethernet card using "lspci". The address should be in the form of: 04:00.0.
-Setup pci passthrough by adding 'hostpci0: 04:00.0' to /etc/pve/qemu-server/VMID.conf
+
+edit /etc/pve/qemu-server/VMID.conf
+```
+serial0: socket
+hostpci0: 04:00.0
+```
 
 Step 4: change hypervisor network
-/etc/network/interfaces
+edit /etc/network/interfaces
+```
 auto lo
 iface lo inet loopback
 
@@ -51,10 +57,15 @@ iface int0 inet static
         ovs_type OVSIntPort
         ovs_bridge vmbr0
         ovs_options tag=11
-
-change IP in /etc/hosts to match "address" above.
+```
+edit /etc/hosts
+```
+127.0.0.1 localhost.localdomain localhost
+10.0.11.2 xxx xxx pvelocalhost
+```
+```
 reboot
-
+```
 Step 5: configure pfsense
 Back to LARA, use 'qm terminal VMID' to connect to pfsense VM.
 Finish initial setup.
