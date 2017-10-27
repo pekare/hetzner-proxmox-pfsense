@@ -14,16 +14,16 @@ edit /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"
 
 edit /etc/modules
-'''
+```
 vfio
 vfio_iommu_type1
 vfio_pci
 vfio_virqfd
-'''
-'''
+```
+```
 update-grub
 reboot
-'''
+```
 Step 3: create pfsense vm
 Create a VM with 1 virtio interface.
 Enable serial console by adding 'serial0: socket' to /etc/pve/qemu-server/VMID.conf.
