@@ -9,7 +9,19 @@ Request a LARA (their nickname for KVM/IPMI) session.
 I had a flash drive installed since exploring SmartOS eariler, so I just dd'ed the .iso from the linux rescue system.
 Either that or request them to mount the iso in the LARA (KVM/IPMI) session.
 
-## step 2: enable pci passthrough
+## step 2: install openvswitch
+edit /etc/apt/sources.list.d/pve-enterprise.list
+```
+#deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise
+deb http://download.proxmox.com/debian/pve stretch pve-no-subscription
+```
+```
+apt update
+apt upgrade
+apt install openvswitch-switch
+```
+
+## step 3: enable pci passthrough
 edit /etc/default/grub
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"
@@ -25,7 +37,7 @@ vfio_virqfd
 update-grub
 reboot
 ```
-## step 3: create pfsense vm
+## step 4: create pfsense vm
 - Create a VM with 1 virtio interface.
 - Boot vm and install as EMBEDDED.
 - Shutdown VM after first reboot.
@@ -38,7 +50,7 @@ serial0: socket
 hostpci0: 04:00.0
 ```
 
-## step 4: change hypervisor network
+## step 5: change hypervisor network
 edit /etc/network/interfaces
 ```
 auto lo
@@ -66,7 +78,7 @@ edit /etc/hosts
 ```
 reboot
 ```
-## step 5: configure pfsense
+## step 6: configure pfsense
 - Back to LARA, use 'qm terminal VMID' to connect to pfsense VM.
 - Finish initial setup.
   - WAN -> em0 -> v4/DHCP4: ${external_ip}/${cidr}
@@ -75,4 +87,5 @@ reboot
 - Go to https://${external_ip} and System -> Advanced -> Networking
 check 'Disable hardware checksum offload'. (Not sure why, but that hindered me from connecting to webui/ssh on hypervisor.)
 
-## step 6: setup port forwardring or vpn to your liking..
+## step 7: setup port forwardring or vpn to your liking..
+Profit
