@@ -1,6 +1,6 @@
 # hetzner-proxmox-pfsense
 
-I did not really like the NAT solutions recommended for ESXi/Proxmox/SmartOS on Hetzner.
+I did not really like the NAT solutions recommended for Proxmox/SmartOS on Hetzner.
 The perfectionist in me wanted to have the hypervisor behind the same firewall as the VM's.
 This is how I managed to implement pfSense with 1 NIC (1 IP) in Proxmox using PCI passthrough.
 
