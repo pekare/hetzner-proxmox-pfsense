@@ -88,4 +88,4 @@ reboot
 check 'Disable hardware checksum offload'. (Not sure why, but that hindered me from connecting to webui/ssh on hypervisor.)
 - Setup port forwardring or vpn to your liking..
 
-## step 7: Profit
+## step 7: profit
