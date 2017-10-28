@@ -86,6 +86,6 @@ reboot
 - Enter shell (option 8), disable pf 'pfctl -d'
 - Go to https://${external_ip} and System -> Advanced -> Networking
 check 'Disable hardware checksum offload'. (Not sure why, but that hindered me from connecting to webui/ssh on hypervisor.)
+- Setup port forwardring or vpn to your liking..
 
-## step 7: setup port forwardring or vpn to your liking..
-Profit
+## step 7: Profit
