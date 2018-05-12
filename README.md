@@ -4,6 +4,10 @@ I did not really like the NAT solutions recommended for Proxmox/SmartOS on Hetzn
 The perfectionist in me wanted to have the hypervisor behind the same firewall as the VM's.
 This is how I managed to implement pfSense with 1 NIC (1 IP) in Proxmox using PCI passthrough.
 
+P.S. This was written with pfSense 2.3 in mind.
+Version 2.4 do not use the same installer and do not offer the option of enabling serial-console.
+I suggest you consult https://doc.pfsense.org/index.php/Installing_pfSense for an alternative solution.
+
 ## step 1: install proxmox
 Request a LARA (their nickname for KVM/IPMI) session.
 I had a flash drive installed since exploring SmartOS earlier, so I just dd'ed the .iso from the linux rescue system.
